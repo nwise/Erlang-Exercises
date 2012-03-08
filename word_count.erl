@@ -1,12 +1,18 @@
 -module(word_count).
--export([word_count/1]).
+-export([num_words/1]).
+-export([count_spaces/1]).
 
-word_count(" ") -> 1;
-word_count(N) -> 
+num_words(N) ->
+  count_spaces(N) + 1
+.
+
+count_spaces(" ") -> 1;
+count_spaces(N) -> 
   Length = string:len(N),
   if
     Length>1 ->
-     word_count(string:substr(N, 1, 1)) + word_count(string:substr(N, 2, string:len(N)));
+     count_spaces(string:substr(N, 1, 1)) + count_spaces(string:substr(N, 2, string:len(N)));
     true ->
       0
-  end.
+  end
+.
